@@ -16,6 +16,7 @@ class Preguntas extends Component
     public $pregunta;
     public $subtitle;
     public $duracion;
+    public $activo;
 
     protected $rules = [
         'pregunta_id'=> 'nullable|numeric',
@@ -87,6 +88,17 @@ class Preguntas extends Component
             $pregunta->delete();
         }
         $this->resetState();
+    }
+
+    public function launchPregunta($pregunta_id){
+        $pregunta = Pregunta::find($pregunta_id);
+        if($pregunta){
+            $pregunta->activo=true;
+            $pregunta->save();
+        }
+        $this->resetState();
+        
+        
     }
 
     public function resetState()

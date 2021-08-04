@@ -11,7 +11,11 @@ class RespuestaController extends Controller
 {
     //
     public function sendRespuesta(RespuestaRequest $request){
-        $respuesta = Respuesta::create($request->all());
+        $respuesta = Respuesta::create([
+            'perfil_id'=>$request->perfil_id,
+            'pregunta_id'=>$request->pregunta_id,
+            'opcion_id'=>$request->opcion_id
+        ]);
         return response()->json(['message'=>"success",'respuest'=>$respuesta]);
         
     }

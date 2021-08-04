@@ -19,6 +19,7 @@ class CreatePreguntasTable extends Migration
             $table->string('pregunta');
             $table->string('subtitle')->nullable();
             $table->time('duracion');
+            $table->boolean('activo')->default(false);
             $table->foreign('encuesta_id')->references('id')->on('encuestas')->onDelete('cascade');
             $table->timestamps();
         });

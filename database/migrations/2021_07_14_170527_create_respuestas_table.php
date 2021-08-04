@@ -19,7 +19,7 @@ class CreateRespuestasTable extends Migration
             $table->unsignedBigInteger('perfil_id');
             $table->unsignedBigInteger('opcion_id');
             $table->foreign('pregunta_id')->references('id')->on('preguntas');
-            $table->foreign('perfil_id')->references('id')->on('users');
+            $table->foreign('perfil_id')->references('id')->on('perfils');
             $table->foreign('opcion_id')->references('id')->on('opciones');
             $table->timestamps();
         });

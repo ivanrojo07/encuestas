@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Pregunta;
+use App\Models\Respuesta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,5 +19,17 @@ class Opciones extends Model
 
     public function pregunta(){
         return $this->belongsTo(Pregunta::class);
+    }
+
+    public function respuestas(){
+        return $this->hasMany(Respuesta::class, 'opcion_id','id');
+    }
+
+    public function getTotalRespuestasAttribute(){
+        return count($this->respuestas);
+    }
+    public function getPorcentajeRespuestasAttribute(){
+        $porcent = ($this->total_respuestas/$this->pregunta->total_respuestas)*100;
+        return round($porcent,2);
     }
 }

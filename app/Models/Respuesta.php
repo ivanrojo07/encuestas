@@ -13,8 +13,8 @@ class Respuesta extends Model
     use HasFactory;
 
     protected $fillable=[
-        'pregunta_id',
         'perfil_id',
+        'pregunta_id',
         'opcion_id',
     ];
 
