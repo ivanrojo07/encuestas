@@ -29,6 +29,9 @@ class Opciones extends Model
         return count($this->respuestas);
     }
     public function getPorcentajeRespuestasAttribute(){
+        if($this->pregunta->total_respuestas < 1){
+            return 0;
+        }
         $porcent = ($this->total_respuestas/$this->pregunta->total_respuestas)*100;
         return round($porcent,2);
     }
