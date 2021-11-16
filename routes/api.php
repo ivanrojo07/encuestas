@@ -28,5 +28,5 @@ Route::post('/auth/login',[AuthController::class,'login']);
 // Registrar perfil movil en app
 Route::post('perfil/register',[PerfilController::class,'register']);
 // mostrar perfil de usuario
-Route::get('perfil/{perfil}',[PerfilController::class,'show']);
-Route::post('respuesta/',[RespuestaController::class,'sendRespuesta']);
+Route::get('perfil',[PerfilController::class,'show'])->middleware('jwt');
+Route::middleware('jwt')->post('respuesta/',[RespuestaController::class,'sendRespuesta']);

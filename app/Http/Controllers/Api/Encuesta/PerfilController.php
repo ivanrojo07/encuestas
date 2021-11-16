@@ -15,15 +15,15 @@ class PerfilController extends Controller
         $perfil = Perfil::create($request->all());
         return response()->json([
             'message'=>'success',
-            'perfil'=>$perfil
+            'token'=>$perfil->token
         ],201);
     }
 
-    public function show(Perfil $perfil){
-        if($perfil){
+    public function show(Request $request){
+        if($request->perfil){
             return response()->json([
                 'message'=>'success',
-                'perfil' => $perfil
+                'perfil' => $request->perfil
             ],200);
         }
         else{
