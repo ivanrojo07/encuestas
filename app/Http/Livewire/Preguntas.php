@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Pregunta;
+use App\Events\NewQuestion;
 
 class Preguntas extends Component
 {
@@ -91,12 +92,18 @@ class Preguntas extends Component
     }
 
     public function launchPregunta($pregunta_id){
-        $pregunta = Pregunta::find($pregunta_id);
-        if($pregunta){
-            $pregunta->activo=true;
-            $pregunta->save();
+        try{
+            $pregunta = Pregunta::find($pregunta_id);
+            if($pregunta){
+                // $pregunta->activo=true;
+                $pregunta->save();
+                event(new NewQuestion($pregunta));
+            }
+            $this->resetState();
         }
-        $this->resetState();
+        catch(\Exception $e){
+            dd($e);
+        }
         
         
     }
