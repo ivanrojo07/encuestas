@@ -16,7 +16,6 @@ class NewQuestion implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $pregunta;
-    public $opciones;
     /**
      * Create a new event instance.
      *
@@ -35,6 +34,10 @@ class NewQuestion implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('new-question');
+        return new Channel('Question');
+    }
+
+    public function broadcastAs() {
+        return 'new_question';
     }
 }

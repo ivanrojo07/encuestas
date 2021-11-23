@@ -95,7 +95,7 @@ class Preguntas extends Component
         try{
             $pregunta = Pregunta::find($pregunta_id);
             if($pregunta){
-                // $pregunta->activo=true;
+                $pregunta->activo=true;
                 $pregunta->save();
                 event(new NewQuestion($pregunta));
             }
