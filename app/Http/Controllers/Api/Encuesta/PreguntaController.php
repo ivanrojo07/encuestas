@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Encuesta;
 use App\Models\Pregunta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class PreguntaController extends Controller
 {
@@ -14,9 +15,12 @@ class PreguntaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        $preguntas = Pregunta::where('activo', true)->get();
+        $perfil = $request->perfil;
+        $preguntas = Pregunta::where('activo', true)->whereHas('respuestas',function(Builder $query) use($perfil) {
+            $query->where('perfil_id', "!=", $perfil['id']);
+        })->get();
         $response = $preguntas->reject(function($pregunta){
             return $pregunta->date_end->lte(date(now()));
         });
