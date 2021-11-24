@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\AuthController;
 use App\Http\Controllers\Api\Encuesta\PerfilController;
+use App\Http\Controllers\Api\Encuesta\PreguntaController;
 use App\Http\Controllers\Api\Encuesta\RespuestaController;
 
 /*
@@ -30,3 +31,4 @@ Route::post('perfil/register',[PerfilController::class,'register']);
 // mostrar perfil de usuario
 Route::get('perfil',[PerfilController::class,'show'])->middleware('jwt');
 Route::middleware('jwt')->post('respuesta/',[RespuestaController::class,'sendRespuesta']);
+Route::middleware('jwt')->get('preguntas/',PreguntaController::class);
