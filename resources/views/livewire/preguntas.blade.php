@@ -20,7 +20,7 @@
 
                         @if ($pregunta->activo && strtotime(now()) <= strtotime($pregunta->date_end))
                             <span wire:poll.1000ms class="rounded-full bg-gray-400 text-white m-4 p-1">
-                                {{ strtotime(now()) <= strtotime($pregunta->date_end) ? date('H:i:s', strtotime($pregunta->date_end) - strtotime(now())) : 'Tiempo terminado' }}
+                                {{ strtotime(now()) <= strtotime($pregunta->date_end) ? date_create('now')->diff( $pregunta->date_end )->format('%H:%I:%S') : 'Tiempo terminado' }}
                             </span>
                         @elseif ($pregunta->activo && strtotime(now()) >= strtotime($pregunta->date_end))
                             <span class="rounded-full bg-gray-400 text-white m-4 p-1">Tiempo terminado</span>

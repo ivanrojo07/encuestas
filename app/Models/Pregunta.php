@@ -20,6 +20,13 @@ class Pregunta extends Model
         'activo'
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['date_end'];
+
     public function getDateEndAttribute(){
         $time = explode(':',$this->duracion);
         $date = new Carbon($this->updated_at);
