@@ -43,14 +43,14 @@ class Preguntas extends Component
             Pregunta::find($this->pregunta_id)->update([
                 'pregunta'=>$this->pregunta,
                 'subtitle'=>$this->subtitle,
-                'duracion'=>date('H:i:s',($this->duracion*60)),
+                'duracion'=>$this->secondsToTime($this->duracion*60),
             ]);
         }
         else{
             $pregunta = new Pregunta([
                 'pregunta'=>$this->pregunta,
                 'subtitle'=>$this->subtitle,
-                'duracion'=>date('H:i:s',($this->duracion*60)),
+                'duracion'=>$this->secondsToTime($this->duracion*60),
             ]);
 
             $this->encuesta->preguntas()->save($pregunta);
@@ -118,6 +118,12 @@ class Preguntas extends Component
         $this->subtitle = '';
         $this->duracion = '';
 
+    }
+    private function secondsToTime($seconds)
+    {
+        $dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$seconds");
+    return $dtF->diff($dtT)->format('%H:%I:%S');
     }
 
 }

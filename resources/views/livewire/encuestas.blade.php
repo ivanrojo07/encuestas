@@ -17,13 +17,13 @@
                     </p>
                 </div>
                 <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-                    <a href="#" wire:click.prevent="editEncuesta({{$encuesta->id}})" class="m-1 bg-indigo-600 text-white rounded-full px-3 justify-center">
+                    <a href="#" wire:click.prevent="editEncuesta({{$encuesta->id}})" class="m-1 mx-auto w-full bg-indigo-600 text-white rounded-full px-3 justify-center">
                         Editar
                     </a>
-                    <a href="#" wire:click.prevent="deleteEncuesta({{$encuesta->id}})" class="m-1 bg-indigo-600 text-white rounded-full px-3 justify-center">
+                    <a href="#" wire:click.prevent="deleteEncuesta({{$encuesta->id}})" class="m-1 mx-auto w-full bg-indigo-600 text-white rounded-full px-3 justify-center">
                         Eliminar
                     </a>
-                    <a href="{{route('encuestas.show',$encuesta)}}" class="m-1 bg-indigo-600 text-white rounded-full px-3 justify-center">
+                    <a href="{{route('encuestas.show',$encuesta)}}" class="m-1 mx-auto w-full bg-indigo-600 text-white rounded-full px-3 justify-center">
                         Detalles
                     </a>
                 </div>
