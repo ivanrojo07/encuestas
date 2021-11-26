@@ -18,8 +18,8 @@ class PreguntaController extends Controller
     public function __invoke(Request $request)
     {
         $perfil = $request->perfil;
-        $preguntas = Pregunta::where('activo', true)->whereHas('respuestas',function(Builder $query) use($perfil) {
-            $query->where('perfil_id', "!=", $perfil['id']);
+        $preguntas = Pregunta::where('activo', true)->whereDoesntHave('respuestas',function(Builder $query) use($perfil) {
+            $query->orWhere('respuestas.perfil_id', "!=", $perfil['id']);
         })->get();
         $response = $preguntas->reject(function($pregunta){
             return $pregunta->date_end->lte(date(now()));
@@ -28,7 +28,7 @@ class PreguntaController extends Controller
         foreach($response as $res){
             array_push($collection, $res->load('opciones'));
         }
-        return response()->json(['preguntas'=>$collection,'date_now'=>date(now())],200);
+        return response()->json(['preguntas'=>$collection,'perfil'=>$perfil['id']],200);
 
     }
 }
