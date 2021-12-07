@@ -9,6 +9,7 @@ class Pregunta extends Component
 {
     public $pregunta;
     public $option = "edad";
+    public $graph = "bar";
     function mount(PreguntaModel $pregunta){
         $this->pregunta = $pregunta;
     }

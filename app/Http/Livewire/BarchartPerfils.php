@@ -14,18 +14,20 @@ class BarchartPerfils extends Component
     public $opciones;
     public $opt;
     public $data;
+    public $graph;
 
-    function mount($field, $respuestas, $opciones){
+    function mount($graph, $field, $respuestas, $opciones){
         $this->field = $field;
         $this->respuestas = $respuestas;
         $this->opciones = $opciones;
-        $this->opt = Perfil::select($field)->distinct()->orderBy($field,"ASC")->get()->pluck($field);
+        $this->graph = $graph;
+        $this->opt = Perfil::select($this->field)->distinct()->orderBy($this->field,"ASC")->get()->pluck($this->field);
         $this->data =
             DB::table('respuestas')
                 ->join('opciones','respuestas.opcion_id','=','opciones.id')
                 ->join('perfils', 'respuestas.perfil_id','=','perfils.id')
-                ->selectRaw('opciones.opcion, count(*) as perfil_count, '.$field)->whereIn('opciones.id',$opciones->pluck('id'))->whereIn("perfils.".$this->field,$this->opt)->groupBy('perfils.'.$field,'opciones.id')
-                ->get()->groupBy(['opcion',$field]);
+                ->selectRaw('opciones.opcion, count(*) as perfil_count, '.$this->field)->whereIn('opciones.id',$this->opciones->pluck('id'))->whereIn("perfils.".$this->field,$this->opt)->groupBy('perfils.'.$this->field,'opciones.id')
+                ->get()->groupBy(['opcion',$this->field]);
 
     }
 
