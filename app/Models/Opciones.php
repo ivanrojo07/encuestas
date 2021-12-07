@@ -25,6 +25,7 @@ class Opciones extends Model
         return $this->hasMany(Respuesta::class, 'opcion_id','id');
     }
 
+
     public function getTotalRespuestasAttribute(){
         return count($this->respuestas);
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EncuestaController;
+use App\Http\Controllers\PreguntaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Route::prefix('/encuestas')->name('encuestas.')->middleware(['auth:sanctum', 've
     Route::get('/',[EncuestaController::class,'index'])->name('index');
     Route::get('/{encuesta}',[EncuestaController::class,'show'])->name('show');
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('preguntas/{pregunta}', PreguntaController::class)->name('preguntas.show');

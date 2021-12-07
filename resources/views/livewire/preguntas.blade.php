@@ -22,8 +22,10 @@
                             <span wire:poll.1000ms class="rounded-full bg-gray-400 text-white m-4 p-1">
                                 {{ strtotime(now()) <= strtotime($pregunta->date_end) ? date_create('now')->diff( $pregunta->date_end )->format('%H:%I:%S') : 'Tiempo terminado' }}
                             </span>
+                            <a href={{ route('preguntas.show',['pregunta'=>$pregunta]) }}>Más información</a>
                         @elseif ($pregunta->activo && strtotime(now()) >= strtotime($pregunta->date_end))
                             <span class="rounded-full bg-gray-400 text-white m-4 p-1">Tiempo terminado</span>
+                            <a href={{ route('preguntas.show',['pregunta'=>$pregunta]) }}>Más información</a>
                         @else
                             <span class="rounded-full bg-gray-400 text-white m-4 p-1">{{ $pregunta->duracion }}</span>
 
